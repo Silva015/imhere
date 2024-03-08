@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  Alert,
 } from "react-native";
 
 import { styles } from "./styles";
@@ -26,11 +27,27 @@ export function Home() {
   ];
 
   function handleAddParticipant() {
-    console.log("Adicionando participante");
+    if (participants.includes("Rodrigo")) {
+      Alert.alert("Erro", "Participante já adicionado");
+      return;
+    }
   }
 
   function handleRemoveParticipant(name: string) {
-    console.log(`Removendo participante ${name}`);
+    Alert.alert(
+      "Remover participante",
+      `Deseja remover o paricipante ${name}?`,
+      [
+        {
+          text: "Sim",
+          onPress: () => Alert.alert("Participante removido"),
+        },
+        {
+          text: "Não",
+          style: "cancel",
+        },
+      ]
+    );
   }
 
   return (
@@ -44,6 +61,7 @@ export function Home() {
           placeholderTextColor={"#6B6B6B"}
           // keyboardType="email-address" É possível selecionar qual o tipo de teclado que será exibido para facilitar a vida do usuário
         />
+
         <TouchableOpacity style={styles.button} onPress={handleAddParticipant}>
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
@@ -55,7 +73,7 @@ export function Home() {
         renderItem={({ item }) => (
           <Participant
             name={item}
-            onRemove={() => handleRemoveParticipant("Rodrigo")}
+            onRemove={() => handleRemoveParticipant(item)}
           />
         )}
         showsVerticalScrollIndicator={false}
