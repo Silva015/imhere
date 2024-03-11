@@ -1,12 +1,12 @@
+import { useState } from "react";
 import {
+  Alert,
+  FlatList,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  FlatList,
-  Alert,
 } from "react-native";
-import { useState } from "react";
 
 import { styles } from "./styles";
 
@@ -31,7 +31,10 @@ export function Home() {
       [
         {
           text: "Sim",
-          onPress: () => Alert.alert("Participante removido"),
+          onPress: () =>
+            setParticipants((prevState) =>
+              prevState.filter((participant) => participant !== name)
+            ),
         },
         {
           text: "Não",
@@ -49,7 +52,7 @@ export function Home() {
         <TextInput
           style={styles.input}
           placeholder="Nome do Participante"
-          placeholderTextColor={"#6B6B6B"}
+          placeholderTextColor="#6B6B6B"
           onChangeText={setParticipantName}
           value={participantName}
           // keyboardType="email-address" É possível selecionar qual o tipo de teclado que será exibido para facilitar a vida do usuário
