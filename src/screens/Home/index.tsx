@@ -6,31 +6,22 @@ import {
   FlatList,
   Alert,
 } from "react-native";
+import { useState } from "react";
 
 import { styles } from "./styles";
 
 import { Participant } from "../../components/Participant";
 
 export function Home() {
-  const participants = [
-    "Rodrigo",
-    "Diego",
-    "Vini",
-    "Biro",
-    "Rafael",
-    "Lucas",
-    "Gustavo",
-    "Mayk",
-    "Guilherme",
-    "Thiago",
-    "Alexandre",
-  ];
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [participantName, setParticipantName] = useState("");
 
   function handleAddParticipant() {
-    if (participants.includes("Rodrigo")) {
-      Alert.alert("Erro", "Participante já adicionado");
-      return;
+    if (participants.includes(participantName)) {
+      return Alert.alert("Erro", "Participante já adicionado");
     }
+    setParticipants((prevState) => [...prevState, participantName]);
+    setParticipantName("");
   }
 
   function handleRemoveParticipant(name: string) {
@@ -59,6 +50,8 @@ export function Home() {
           style={styles.input}
           placeholder="Nome do Participante"
           placeholderTextColor={"#6B6B6B"}
+          onChangeText={setParticipantName}
+          value={participantName}
           // keyboardType="email-address" É possível selecionar qual o tipo de teclado que será exibido para facilitar a vida do usuário
         />
 
