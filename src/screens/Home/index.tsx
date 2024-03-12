@@ -55,7 +55,8 @@ export function Home() {
           placeholderTextColor="#6B6B6B"
           onChangeText={setParticipantName}
           value={participantName}
-          // keyboardType="email-address" É possível selecionar qual o tipo de teclado que será exibido para facilitar a vida do usuário
+          // keyboardType="email-address" É possível selecionar qual o tipo de teclado que será exibido
+          // para facilitar a vida do usuário
         />
 
         <TouchableOpacity style={styles.button} onPress={handleAddParticipant}>
